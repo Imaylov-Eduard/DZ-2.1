@@ -9,6 +9,7 @@ public class App {
     public static void main(String[] args) {
         ProductBasket basket = new ProductBasket();
 
+
         basket.addProduct(new SimpleProduct("Ноутбук", 50000));
         basket.addProduct(new SimpleProduct("Смартфон", 30000));
         basket.addProduct(new DiscountedProduct("Наушники", 5000, 20));
