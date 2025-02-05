@@ -6,6 +6,7 @@ public class SimpleProduct extends Product {
     public SimpleProduct(String name, int price) {
         super(name);
         this.price = price;
+
     }
 
     @Override
