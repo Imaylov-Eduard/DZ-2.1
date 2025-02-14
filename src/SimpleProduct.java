@@ -7,6 +7,7 @@ public class SimpleProduct extends Product {
         super(name);
         this.price = price;
 
+
     }
 
     @Override
