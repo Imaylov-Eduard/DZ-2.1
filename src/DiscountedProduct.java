@@ -8,8 +8,6 @@ public class DiscountedProduct extends Product {
         super(name);
         this.basePrice = basePrice;
         this.discountPercent = discountPercent;
-
-
     }
 
     @Override
