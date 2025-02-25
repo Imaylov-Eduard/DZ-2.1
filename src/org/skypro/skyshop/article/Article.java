@@ -17,6 +17,7 @@ public class Article implements Searchable {
         this.content = content;
     }
 
+
     @Override
     public String getName() {
         return title;
