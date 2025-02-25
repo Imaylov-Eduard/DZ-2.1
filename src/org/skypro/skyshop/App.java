@@ -67,6 +67,7 @@ public class App {
         Searchable bestMatch = searchEngine.findBestMatch("ноутбук");
         System.out.println("Найден лучший результат: " + bestMatch.getName());
 
+
         Searchable bestMatch1 = searchEngine.findBestMatch("планшет"); // Несуществующий запрос
         System.out.println("Найден лучший результат: " + bestMatch.getName());
     }
