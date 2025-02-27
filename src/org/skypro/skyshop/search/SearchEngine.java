@@ -33,4 +33,35 @@ public class SearchEngine {
         }
         return results;
     }
+
+    public Searchable findBestMatch(String search) throws org.skypro.skyshop.search.BestResultNotFound {
+        Searchable bestMatch = null;
+        int maxCount = -1;
+
+        for (int i = 0; i < count; i++) {
+            String searchTerm = searchables[i].getSearchTerm();
+            int currentCount = countOccurrences(searchTerm, search);
+
+            if (currentCount > maxCount) {
+                maxCount = currentCount;
+                bestMatch = searchables[i];
+            }
+        }
+
+        if (bestMatch == null) {
+            throw new org.skypro.skyshop.search.BestResultNotFound("Не найдено подходящего результата для запроса: " + search);
+        }
+
+        return bestMatch;
+    }
+
+    private int countOccurrences(String text, String substring) {
+        int count = 0;
+        int index = 0;
+        while ((index = text.indexOf(substring, index)) != -1) {
+            count++;
+            index += substring.length();
+        }
+        return count;
+    }
 }

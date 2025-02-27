@@ -8,11 +8,12 @@ import org.skypro.skyshop.product.Product;
 import org.skypro.skyshop.product.SimpleProduct;
 import org.skypro.skyshop.search.SearchEngine;
 import org.skypro.skyshop.search.Searchable;
+import org.skypro.skyshop.search.BestResultNotFound;
 
 import java.util.Arrays;
 
 public class App {
-    public static void main(String[] args) {
+    public static void main(String[] args) throws BestResultNotFound {
         // Создание товаров
         Product laptop = new SimpleProduct("Ноутбук", 50000);
         Product smartphone = new SimpleProduct("Смартфон", 30000);
@@ -41,7 +42,7 @@ public class App {
         Searchable[] searchResults = searchEngine.search(query);
         System.out.println("Результаты поиска по запросу \"" + query + "\": " + Arrays.toString(searchResults));
 
-        // Пример работы с корзиной (как в вашем исходном коде)
+        // Пример работы с корзиной
         ProductBasket basket = new ProductBasket();
         basket.addProduct(laptop);
         basket.addProduct(smartphone);
@@ -61,5 +62,13 @@ public class App {
 
         basket.clearBasket();
         basket.printBasket();
+
+        // Демонстрация нового метода поиска
+        Searchable bestMatch = searchEngine.findBestMatch("ноутбук");
+        System.out.println("Найден лучший результат: " + bestMatch.getName());
+
+
+        Searchable bestMatch1 = searchEngine.findBestMatch("планшет"); // Несуществующий запрос
+        System.out.println("Найден лучший результат: " + bestMatch.getName());
     }
 }
