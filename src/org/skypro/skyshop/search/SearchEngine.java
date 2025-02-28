@@ -65,4 +65,3 @@ public class SearchEngine {
         return count;
     }
 }
-
