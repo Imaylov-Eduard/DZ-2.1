@@ -5,4 +5,3 @@ public class BestResultNotFound extends Exception {
         super(message);
     }
 }
-
