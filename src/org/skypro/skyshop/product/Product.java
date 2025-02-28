@@ -36,4 +36,3 @@ public abstract class Product implements Searchable {
         return getName() + ": " + getPrice();
     }
 }
-
