@@ -1,55 +1,45 @@
 package org.skypro.skyshop.search;
 
-import java.util.Arrays;
+import java.util.ArrayList;
+import java.util.List;
 
 public class SearchEngine {
-    private final Searchable[] searchables;
-    private int count;
+    private final List<Searchable> searchables; // Заменяем массив на список
 
-    public SearchEngine(int size) {
-        searchables = new Searchable[size];
-        count = 0;
+    public SearchEngine() {
+        searchables = new ArrayList<>(); // Инициализируем список
     }
 
     public void add(Searchable item) {
-        if (count < searchables.length) {
-            searchables[count] = item;
-            count++;
-        }
+        searchables.add(item); // Добавляем элемент без ограничений
     }
 
-    public Searchable[] search(String query) {
-        Searchable[] results = new Searchable[5];
-        int resultCount = 0;
-
-        for (int i = 0; i < count; i++) {
-            if (searchables[i].getSearchTerm().toLowerCase().contains(query.toLowerCase())) {
-                results[resultCount] = searchables[i];
-                resultCount++;
-                if (resultCount == 5) {
-                    break;
-                }
+    public List<Searchable> search(String query) {
+        List<Searchable> results = new ArrayList<>();
+        for (Searchable item : searchables) {
+            if (item.getSearchTerm().toLowerCase().contains(query.toLowerCase())) {
+                results.add(item); // Добавляем все подходящие результаты
             }
         }
         return results;
     }
 
-    public Searchable findBestMatch(String search) throws org.skypro.skyshop.search.BestResultNotFound {
+    public Searchable findBestMatch(String search) throws BestResultNotFound {
         Searchable bestMatch = null;
         int maxCount = -1;
 
-        for (int i = 0; i < count; i++) {
-            String searchTerm = searchables[i].getSearchTerm();
+        for (Searchable item : searchables) {
+            String searchTerm = item.getSearchTerm();
             int currentCount = countOccurrences(searchTerm, search);
 
             if (currentCount > maxCount) {
                 maxCount = currentCount;
-                bestMatch = searchables[i];
+                bestMatch = item;
             }
         }
 
         if (bestMatch == null) {
-            throw new org.skypro.skyshop.search.BestResultNotFound("Не найдено подходящего результата для запроса: " + search);
+            throw new BestResultNotFound("Не найдено подходящего результата для запроса: " + search);
         }
 
         return bestMatch;
